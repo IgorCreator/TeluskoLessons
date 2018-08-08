@@ -9,7 +9,7 @@
 <%@ page import="java.util.Date" %>
 <body>
 
-    <h3>Hi Customer</h3><br>
+    <h3>Hi ${name}</h3><br>
     <strong>Current Time is</strong>: <%=new Date() %>
 
 </body>
