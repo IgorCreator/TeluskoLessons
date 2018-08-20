@@ -8,7 +8,8 @@
 </head>
 <body>
 
-<h3>Welcome ${name}</h3><br>
+<%--<h3>Welcome alien ${obj}</h3><br>--%>
+<h3>Welcome alien: ${obj.aid}, ${obj.aname}, ${obj.lang}</h3><br>
 
 </body>
 </html>
