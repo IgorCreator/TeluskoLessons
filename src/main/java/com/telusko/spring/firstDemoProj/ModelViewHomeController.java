@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ModelViewHomeController {
 
         @RequestMapping("welcome")
-        public ModelAndView home(Alien alien) {
+        public ModelAndView addAlien(Alien alien) {
             System.out.println(alien);
 
             ModelAndView modelAndView = new ModelAndView();

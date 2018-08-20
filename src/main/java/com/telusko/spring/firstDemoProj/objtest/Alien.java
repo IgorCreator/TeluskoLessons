@@ -6,9 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 @Component
 public class Alien {
 
+    @Id
     @Getter
     @Setter
     private int aid;
@@ -19,11 +24,11 @@ public class Alien {
     @Setter
     private String lang;
 
-//    @Getter
-//    @Setter
-//    @Autowired
-//    @Qualifier("laptop")
-//    private Laptop laptop;
+    //    @Getter
+    //    @Setter
+    //    @Autowired
+    //    @Qualifier("laptop")
+    //    private Laptop laptop;
 
     public Alien() {
         System.out.println("Object created");
@@ -44,3 +49,4 @@ public class Alien {
                 ;
     }
 }
+
