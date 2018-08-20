@@ -14,7 +14,12 @@
          <label>Object name</label> <input type="text" name="aname"><br>
          <label>Object ID</label> <input type="text" name="aid"><br>
          <label>Object Lang</label> <input type="text" name="lang"><br>
-         <input type="submit">
+         <input type="submit" name="Input in DB">
      </form>
+
+    <form action="getAlien">
+        <label>Object ID</label> <input type="text" name="aid"><br>
+        <input type="submit" name="Find">
+    </form>
 </body>
 </html>
