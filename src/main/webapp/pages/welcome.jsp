@@ -8,14 +8,7 @@
 </head>
 <body>
 
-<%--<h3>Welcome alien ${obj}</h3><br>--%>
-<h3>Welcome alien: ${obj.aid}, ${obj.aname}</h3><br>
-     <form action="addAlien">
-         <label>Object name</label> <input type="text" name="aname"><br>
-         <label>Object ID</label> <input type="text" name="aid"><br>
-         <label>Object Lang</label> <input type="text" name="lang"><br>
-         <input type="submit" name="Input in DB">
-     </form>
+<h3>Welcome alien!</h3><br>
 
     <form action="getAlien">
         <label>Object ID</label> <input type="text" name="aid"><br>
