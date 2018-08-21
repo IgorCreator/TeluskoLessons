@@ -3,28 +3,19 @@ package com.telusko.spring.firstDemoProj;
 import com.telusko.spring.firstDemoProj.dao.AlienRepo;
 import com.telusko.spring.firstDemoProj.objtest.Alien;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+
+@RestController
 public class AlienContoller {
 
     @Autowired
     AlienRepo repo;
 
-    @RequestMapping("/addAlien")
-    public String addAlien(Alien alien) {
-        System.out.println(alien);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("obj", alien);
-        repo.save(alien);
-        return "welcome";
-    }
-
-    @RequestMapping("/getHome")
+    @GetMapping("/getHome")
     public ModelAndView getHome() {
         //Just for test interface AlienRepo
         System.out.println("Find By Lang alien: " + repo.findByLang("Java"));
@@ -35,26 +26,35 @@ public class AlienContoller {
         return modelAndView;
     }
 
-    @RequestMapping("/aliens")
-    @ResponseBody
-    public String getAllAliens() {
-        StringBuilder rez = new StringBuilder();
-        rez.append("<h3>");
-        for (Alien alien : repo.findAll()) {
-            rez.append(alien.toString());
-            rez.append("<br>");
-        }
-        rez.append("</h3>");
-        return rez.toString();
+    @GetMapping(path="/aliens", produces = {"application/json"})
+    public List<Alien> getAllAliens() {
+        return repo.findAll();
     }
 
-    @RequestMapping("/alien/{aid}")
-    @ResponseBody
-    public ModelAndView getAlienById(@PathVariable("aid") int aid) {
+    @GetMapping("/alien/{aid}")
+    public Optional<Alien> getAlienById(@PathVariable("aid") int aid) {
+        return repo.findById(aid);
+    }
+
+    @PostMapping("/alien/add")
+    public Alien addAlien(@RequestBody Alien alien) {
+        System.out.println(alien);
         ModelAndView modelAndView = new ModelAndView("showAlien");
-        Alien alien = repo.findById(aid).orElse(new Alien());
-        System.out.println("Find alien: " + alien);
-        modelAndView.addObject(alien);
-        return modelAndView;
+        modelAndView.addObject("obj", alien);
+        repo.save(alien);
+        return alien;
+    }
+
+    @DeleteMapping("/alien/delete/{aid}")
+    public String deleteAlienById(@PathVariable("aid") int aid) {
+        Alien alien = repo.getOne(aid);
+        repo.delete(alien);
+        return "Alien with ID: " + aid + " was deleted";
+    }
+
+    @PutMapping("/alien/update")
+    public String updateAlien(@RequestBody Alien alien) {
+        repo.save(alien);
+        return "Alien with ID: " + alien + " was updated";
     }
 }
